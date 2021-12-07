@@ -13,6 +13,10 @@ const readFileToArray = () => {
 
 // How much fuel must they spend to align to that position?
 const part1 = (inputArray) => {
+  // Getting the median value is the solution here as the middle ensures the majority has the shortest distance
+  // while the minority will have to do the most steps. In case of uneven, the 2 middle number should be
+  // calculated and checked. This solution avoids having the check every possibility.
+
   // Sort to get the median
   const sortedArray = inputArray.sort((a, b) => a - b);
 
@@ -42,6 +46,12 @@ const part1 = (inputArray) => {
 
 // How much fuel must they spend to align to that position?
 const part2 = (inputArray) => {
+  // In the contrary, getting the average is the soluton here. Since each extra step causes a penalty,
+  // searching for the median doesn't help as the "minority" will cause a extra large penalty. It's therefore
+  // better if everyone does the shortest distance to a point, which is the average of all positions.
+  // Because the average can be a floating point number, both the ceil() and floor() should be checked on
+  // what is the most optimal of the 2.This solution also avoids having the check every possibility.
+
   // Get the average of all the numbers
   const average = Math.floor(
     inputArray.reduce((prev, curr) => prev + curr, 0) / inputArray.length
